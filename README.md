@@ -1,16 +1,16 @@
 # apmc
 A customized Alpine Linux Docker image to manage a Vanilla Minecraft server running on Spigot.
 
-# Docker Hub
+## Docker Hub
 Check out the [Docker](https://hub.docker.com/r/projectinitiative/apmc) hub page.
 
 
 
-# Usage
+## Usage
 
 To run this server, and manage the server files and properties, please specify a directory on the host to house the Minecraft server files. The following docker command will create a container that will automatically run/build the server when it is started.
 
-## Commands for Bash:
+### Commands for Bash:
 
 ```bash
 #!/bin/bash
@@ -28,7 +28,7 @@ sudo docker create --name=mc --tty -i \
 	projectinitiative/apmc
 ```
 
-## Commands for PowerShell:
+### Commands for PowerShell:
 
 ```PowerShell
 $dir="FULL-PATH-TO-STORE-SERVER-ON-HOST" 
@@ -43,9 +43,9 @@ docker create --name=mc --tty -i `
 	-e TZ=America/Chicago `
 	projectinitiative/apmc
 ```
-# Server Management
+## Server Management
 
-## Interacting with the Minecraft console
+### Interacting with the Minecraft console
 
 To interact with the command console without being in-game, run the following while the container is running
 
@@ -55,7 +55,7 @@ docker exec -it mc screen -r mc
 
 To exit the console safely use `CTRL + A then CTRL + D`
 
-## Upgrading the Spigot Server
+### Upgrading the Spigot Server
 
 To upgrade to the current Spigot server, run the following while the container is running
 
@@ -76,9 +76,9 @@ docker exec -it mc screen -r mc
 restart
 ```
 
-# Build from source
+## Build from source
 
-## Bash
+### Bash
 
 Creating the container:
 
@@ -104,7 +104,7 @@ Additionally, the server can be stopped, rebuilt, and started again.
 rebuild-mc.sh "FULL-PATH-TO-STORE-SERVER-ON-HOST"
 ```
 
-## PowerShell
+### PowerShell
 
 Creating the container:
 
@@ -131,12 +131,10 @@ rebuild-mc.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
 ```
 
 
-# License
+## License
 
 [MIT License](./LICENSE)
 
-## Attributions
+### Attributions
 
 [Spigot](https://www.spigotmc.org/wiki/public-license/)
-
-
