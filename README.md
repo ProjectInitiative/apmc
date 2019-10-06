@@ -72,7 +72,7 @@ stop
 /home/Minecraft/start.sh
 ```
 
-> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the main server folder and rename it `spigot.jar` restart server with the following commands
+> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the root server directory on the host and rename it `spigot.jar` restart server with the following commands
 ```bash
 docker exec -it mc screen -r mc 
 restart
