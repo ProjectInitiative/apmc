@@ -8,3 +8,15 @@ $sdir/send-2-screen.sh mc "cd /home/Minecraft; /home/Minecraft/build-latest-serv
 fi
 
 $sdir/send-2-screen.sh mc "cd /home/Minecraft; java -Xmx8G -Xms4G -jar $sdir/spigot.jar nogui"
+
+sleep 5
+
+if cat /home/Minecraft/eula.txt | grep -q "eula=false"; then
+    
+    while cat /home/Minecraft/eula.txt | grep -q "eula=false";
+    do 
+        sleep 1
+    done
+    
+    $sdir/send-2-screen.sh mc "cd /home/Minecraft; java -Xmx8G -Xms4G -jar $sdir/spigot.jar nogui"
+fi 

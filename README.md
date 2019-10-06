@@ -10,6 +10,8 @@ Check out the [Docker](https://hub.docker.com/r/projectinitiative/apmc) hub page
 
 To run this server, and manage the server files and properties, please specify a directory on the host to house the Minecraft server files. The following docker command will create a container that will automatically run/build the server when it is started.
 
+> NOTE: On the first run, the server will not fully initialize until the user agrees to the end user licence agreement. After running the commands below, the user needs to edit the `eula.txt` file found in the root server directory on the host machine. The value `eula=false` needs to be changed to `eula=true`. There is no need to restart the server, just save changes.
+
 ### Commands for Bash:
 
 ```bash
