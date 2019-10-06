@@ -1,6 +1,7 @@
-
-$dir=$args[0]
-$dir="C:\Users\KyleP\Desktop\DockerCompile\Docker" 
+Param(
+    [Parameter(Mandatory=$True,Position=1)]
+    [string]$dir
+) 
 mkdir -p $dir\Minecraft
 
 docker build -t projectinitiative/apmc $PSScriptRoot\..
