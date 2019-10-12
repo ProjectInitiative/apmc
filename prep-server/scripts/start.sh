@@ -7,8 +7,14 @@ git config --global --unset core.autocrlf
 $sdir/send-2-screen.sh mc "cd /home/Minecraft; /home/Minecraft/build-latest-server.sh"
 fi
 
-$sdir/send-2-screen.sh mc "cd /home/Minecraft; java -Xmx8G -Xms4G -jar $sdir/spigot.jar nogui"
+if [ -z "$xms" ]; then
+    xms="-Xms"$minram
+fi
+if  [-z "$xmx"]; then
+    xmx="-Xmx"$maxram
+fi
 
+$sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/spigot.jar nogui"
 sleep 5
 
 if cat /home/Minecraft/eula.txt | grep -q "eula=false"; then

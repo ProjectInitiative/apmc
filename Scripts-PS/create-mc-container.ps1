@@ -10,5 +10,7 @@ docker create --name=mc --tty -i `
 	--restart=always `
 	-v $dir/Minecraft:/home/Minecraft `
 	-p 25565:25565 `
+	-e minram=4G `
+	-e maxram=8G `
 	-e TZ=America/Chicago `
 	projectinitiative/apmc

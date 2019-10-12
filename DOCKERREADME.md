@@ -1,10 +1,28 @@
 # apmc
 A customized Alpine Linux Docker image to manage a Vanilla Minecraft server running on Spigot.
 
-## Docker Hub
-Check out the [Docker](https://hub.docker.com/r/projectinitiative/apmc) hub page.
+## GitHub
+For more information, and to view all scripts included in the image, check out the [GitHub](https://github.com/ProjectInitiative/apmc) page.
 
+## Dockerfile
 
+```Dockerfile
+FROM alpine:3.7
+
+COPY prep-server/ /home/prep-server/
+
+RUN apk update &&\
+    apk add bash &&\
+    apk add git &&\
+    apk add vim &&\ 
+    apk add screen &&\
+    apk add openjdk8 &&\
+    apk upgrade
+
+EXPOSE 25565
+
+ENTRYPOINT /home/prep-server/prep-server.sh && /bin/bash
+```
 
 ## Usage
 
@@ -100,64 +118,29 @@ docker exec -it mc screen -r mc
 restart
 ```
 
-## Build from source
+# License
 
-### Bash
+MIT License
 
-Creating the container:
+Copyright (c) 2019 Kyle Petryszak
 
-```bash
-create-mc-container.sh "FULL-PATH-TO-STORE-SERVER-ON-HOST"
-```
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Starting the container:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-```bash
-docker start mc
-```
-
-Stopping the container:
-
-```bash
-docker stop mc
-```
-
-Additionally, the server can be stopped, rebuilt, and started again.
-
-```bash
-rebuild-mc.sh "FULL-PATH-TO-STORE-SERVER-ON-HOST"
-```
-
-### PowerShell
-
-Creating the container:
-
-```PowerShell
-create-mc-container.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
-```
-
-Starting the container:
-
-```PowerShell
-docker start mc
-```
-
-Stopping the container:
-
-```PowerShell
-docker stop mc
-```
-
-Additionally, the server can be stopped, rebuilt, and started again.
-
-```PowerShell
-rebuild-mc.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
-```
-
-
-## License
-
-[MIT License](./LICENSE)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ### Attributions
 
