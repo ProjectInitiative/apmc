@@ -10,13 +10,12 @@ fi
 if [ -z "$xms" ]; then
     xms="-Xms"$minram
 fi
-if  [-z "$xmx"]; then
+if [ -z "$xmx" ]; then
     xmx="-Xmx"$maxram
 fi
 
-cmd="cd /home/Minecraft; java $xmx $xms -jar $sdir/spigot.jar nogui"
 
-$sdir/send-2-screen.sh mc $cmd
+$sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/spigot.jar nogui"
 sleep 5
 
 if cat /home/Minecraft/eula.txt | grep -q "eula=false"; then
@@ -26,5 +25,5 @@ if cat /home/Minecraft/eula.txt | grep -q "eula=false"; then
         sleep 1
     done
     
-    $sdir/send-2-screen.sh mc $cmd
+    $sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/spigot.jar nogui"
 fi 

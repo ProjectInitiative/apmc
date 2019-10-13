@@ -8,7 +8,8 @@ RUN apk update &&\
     apk add vim &&\ 
     apk add screen &&\
     apk add openjdk8 &&\
-    apk upgrade
+    apk upgrade &&\
+    find /home/prep-server/ -type f -iname "*.sh" -exec chmod +x {} \;
 
 EXPOSE 25565
 
