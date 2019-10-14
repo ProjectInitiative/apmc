@@ -154,7 +154,7 @@ rebuild-mc.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
 
 ## License
 
-[MIT License](https://github.com/ProjectInitiative/apmc/LICENSE)
+[MIT License](https://github.com/ProjectInitiative/apmc/blob/master/LICENSE)
 
 ### Attributions
 
