@@ -1,10 +1,11 @@
 # apmc
 A customized Alpine Linux Docker image to manage a Vanilla Minecraft server running on Spigot.
 
+## GitHub
+For more information, and to view the Dockerfile and all scripts included in the image, check out the [GitHub](https://github.com/ProjectInitiative/apmc) repo.
+
 ## Docker Hub
 Check out the [Docker](https://hub.docker.com/r/projectinitiative/apmc) hub page.
-
-
 
 ## Usage
 
@@ -20,8 +21,6 @@ To run this server, and manage the server files and properties, please specify a
 dir="FULL-PATH-TO-STORE-SERVER-ON-HOST" 
 mkdir -p $dir/Minecraft
 
-sudo docker pull projectinitiative/apmc:latest
-
 sudo docker create --name=mc --tty -i \
 	--restart=always \
 	-v $dir/Minecraft:/home/Minecraft \
@@ -34,8 +33,6 @@ sudo docker create --name=mc --tty -i \
 ```PowerShell
 $dir="FULL-PATH-TO-STORE-SERVER-ON-HOST" 
 mkdir -p $dir\Minecraft
-
-docker pull projectinitiatve/apmc:latest
 
 docker create --name=mc --tty -i `
 	--restart=always `
@@ -157,7 +154,7 @@ rebuild-mc.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
 
 ## License
 
-[MIT License](./LICENSE)
+[MIT License](https://github.com/ProjectInitiative/apmc/LICENSE)
 
 ### Attributions
 
