@@ -26,6 +26,8 @@ sudo docker create --name=mc --tty -i \
 	-v $dir/Minecraft:/home/Minecraft \
 	-p 25565:25565 \
 	projectinitiative/apmc
+
+sudo docker start mc
 ```
 
 ### Commands for PowerShell:
@@ -39,6 +41,8 @@ docker create --name=mc --tty -i `
 	-v $dir/Minecraft:/home/Minecraft `
 	-p 25565:25565 `
 	projectinitiative/apmc
+
+docker start mc
 ```
 
 ## Environmental Variables
