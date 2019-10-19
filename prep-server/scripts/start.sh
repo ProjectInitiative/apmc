@@ -7,10 +7,10 @@ git config --global --unset core.autocrlf
 $sdir/send-2-screen.sh mc "cd /home/Minecraft; /home/Minecraft/build-latest-server.sh"
 fi
 
-if [ -z "$xms" ]; then
+if [ ! -z "$minram" ]; then
     xms="-Xms"$minram
 fi
-if [ -z "$xmx" ]; then
+if [ ! -z "$maxram" ]; then
     xmx="-Xmx"$maxram
 fi
 
