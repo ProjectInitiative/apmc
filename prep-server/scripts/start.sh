@@ -14,6 +14,8 @@ if [ ! -z "$maxram" ]; then
     xmx="-Xmx"$maxram
 fi
 
+$sdir/send-2-screen.sh mc "stop"
+sleep 5
 
 $sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/spigot.jar nogui"
 sleep 5
