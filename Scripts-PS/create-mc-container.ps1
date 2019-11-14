@@ -12,5 +12,7 @@ docker create --name=mc --tty -i `
 	-p 25565:25565 `
 	-e minram=4G `
 	-e maxram=8G `
+	-e server_type=paper `
+	-e EULA=true `
 	-e TZ=America/Chicago `
 	projectinitiative/apmc

@@ -1,9 +1,12 @@
 FROM alpine:3.7
+MAINTAINER Kyle P. <projectinitiativedev@gmail.com>
 
 COPY prep-server/ /home/prep-server/
 
 RUN apk update &&\
     apk add bash &&\
+    apk add gawk && \
+    apk add curl && \
     apk add git &&\
     apk add vim &&\ 
     apk add screen &&\
@@ -13,4 +16,4 @@ RUN apk update &&\
 
 EXPOSE 25565
 
-ENTRYPOINT /home/prep-server/prep-server.sh && /bin/bash
+ENTRYPOINT ["/home/prep-server/prep-server.sh"]
