@@ -1,5 +1,5 @@
 FROM alpine:3.7
-MAINTAINER Kyle P. <projectinitiativedev@gmail.com>
+LABEL Kyle P. <projectinitiativedev@gmail.com>
 
 COPY prep-server/ /home/prep-server/
 
