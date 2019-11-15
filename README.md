@@ -102,7 +102,7 @@ stop
 /home/Minecraft/start.sh
 ```
 
-> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the root server directory on the host and rename it `spigot.jar` restart server with the following commands
+> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the root server directory on the host and rename it `spigot-server.jar` restart server with the following commands
 ```bash
 docker exec -it mc screen -r mc 
 restart
@@ -110,7 +110,11 @@ restart
 
 ### Upgrading the Paper Server
 
-Coming soon, for now simply delete the paper-server.jar file in the docker volume and restart the container. The latest version will be downloaded.
+Coming soon, for now simply delete the `paper-server.jar` file in the docker volume and restart the container. The latest version will be downloaded. Or a different build can be downloaded from [PaperMC](https://papermc.io/downloads). Move the jar file into the root server directory on the host and rename it `paper-server.jar` restart server with the following commands
+```bash
+docker exec -it mc screen -r mc 
+restart
+```
 
 ## Build from source
 
