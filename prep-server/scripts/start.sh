@@ -8,11 +8,14 @@ fi
 if [ ! -z "$maxram" ]; then
     xmx="-Xmx"$maxram
 fi
+if [ -z "$start_script" ]; then 
+    start_script="java $xmx $xms -jar $sdir/*server.jar nogui"
+fi
 
 $sdir/send-2-screen.sh mc "stop"
 sleep 5
 
-$sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/*server.jar nogui"
+$sdir/send-2-screen.sh mc "cd /home/Minecraft; $start_script"
 sleep 5
 
 while ! grep -q "eula=true" /home/Minecraft/eula.txt
@@ -22,4 +25,4 @@ do
         sed -i 's/eula=false/eula=true/' /home/Minecraft/eula.txt
     fi
 done
-$sdir/send-2-screen.sh mc "cd /home/Minecraft; java $xmx $xms -jar $sdir/*server.jar nogui"
+$sdir/send-2-screen.sh mc "cd /home/Minecraft; $start_script"

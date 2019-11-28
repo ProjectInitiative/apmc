@@ -49,13 +49,14 @@ docker start mc
 
 ## Environmental Variables
 
-|  Variable   |                             Description                             | Value Type Example |
-| :---------: | :-----------------------------------------------------------------: | :----------------: |
-|     TZ      |                              Timezone                               |  America/Chicago   |
-|   minram    |                Minimum RAM to allocate to the server                |      1G/512M       |
-|   maxram    |                Maximum RAM to allocate to the server                |      1G/512M       |
-| server_type |       Specify which type of server to be downloaded/compiled        |    spigot/paper    |
-|    EULA     | Automatically accepts the end user license agreement for the server |        true        |
+|   Variable   |                                                   Description                                                   |  Value Type Example  |
+| :----------: | :-------------------------------------------------------------------------------------------------------------: | :------------------: |
+|      TZ      |                                                    Timezone                                                     |   America/Chicago    |
+|    minram    |                                      Minimum RAM to allocate to the server                                      |       1G/512M        |
+|    maxram    |                                      Maximum RAM to allocate to the server                                      |       1G/512M        |
+| server_type  |                             Specify which type of server to be downloaded/compiled                              |     spigot/paper     |
+|     EULA     |                       Automatically accepts the end user license agreement for the server                       |         true         |
+| start_script | Path to custom start script (not named start.sh) Usually used for modded server packs with custom start scripts | PATH-TO-START-SCRIPT |
 
 > NOTE: Environmental variables do not need to be specified to run the server. Default values will be used. 
 

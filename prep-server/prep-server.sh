@@ -11,6 +11,7 @@ if [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo spigot | tr [:upper:]
 	if [ ! -f /home/Minecraft/*spigot-server.jar ]; then
 		git config --global --unset core.autocrlf
 		/home/Minecraft/send-2-screen.sh mc "cd /home/Minecraft; /home/Minecraft/build-latest-server.sh"
+		/home/Minecraft/start.sh
 	fi
 
 elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo paper | tr [:upper:] [:lower:]` ]; then
@@ -18,6 +19,7 @@ elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo paper | tr [:upper:
 	find /home/Minecraft/ -type f -iname "*.sh" -or -iname "*.jar" -exec chmod +x {} \;
 	if [ ! -f /home/Minecraft/*paper-server.jar ]; then
 		/home/Minecraft/get-latest-paper.sh
+		/home/Minecraft/start.sh
 	fi
 
 else
@@ -27,6 +29,7 @@ else
 	if [ ! -f /home/Minecraft/*spigot-server.jar ]; then
 		git config --global --unset core.autocrlf
 		/home/Minecraft/send-2-screen.sh mc "cd /home/Minecraft; /home/Minecraft/build-latest-server.sh"
+		/home/Minecraft/start.sh
 	fi
 fi
 
@@ -34,12 +37,12 @@ fi
 
 
 # trap "/home/Minecraft/send-2-screen.sh mc stop" SIGTERM SIGINT
-trap touch /home/Minecraft/testing.txt SIGTERM SIGINT
-/home/Minecraft/start.sh
+# trap touch /home/Minecraft/testing.txt SIGTERM SIGINT
+# /home/Minecraft/start.sh
 
-while :
-do
-	sleep 60
-done
+# while :
+# do
+# 	sleep 60
+# done
 
 exit 0
