@@ -40,9 +40,9 @@ fi
 # trap touch /home/Minecraft/testing.txt SIGTERM SIGINT
 # /home/Minecraft/start.sh
 
-# while :
-# do
-# 	sleep 60
-# done
+while :
+do
+	sleep 60
+done
 
 exit 0
