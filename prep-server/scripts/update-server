@@ -2,14 +2,17 @@
 
 quiet=false
 restart_server=true
+override=false
 
 OPTIND=1
-while getopts "qn" opt; do
+while getopts "qno" opt; do
 	case $opt in 
 	q)
 		quiet=true;;
 	n)
 		restart_server=false;;
+	o) 
+		override=true;;
 	esac
 done
 
@@ -21,35 +24,45 @@ shift $((OPTIND-1))
 sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
 
-mkdir -p $dir/server-versions
-mv *.jar $dir/server-versions
+mkdir -p "$dir/server-versions"
+mv "$dir/*.jar" "$dir/server-versions"
 
 function paper {
-	send-2-screen build "get-latest-paper"
+	get-latest-paper
 }
 
 function spigot {
 	find $dir -type f -iname "*.sh" -or -iname "*.jar" -exec chmod +x {} \;
 	if [ ! -f $dir/*spigot-server.jar ]; then
 		git config --global --unset core.autocrlf
-		send-2-screen build "build-latest-server"
+		build-latest-server
 	fi
 }
 
-if [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo spigot | tr [:upper:] [:lower:]` ]; then
-	spigot
-elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo paper | tr [:upper:] [:lower:]` ]; then
-	paper
-else
-	spigot
+function check_server {
+	if [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo spigot | tr [:upper:] [:lower:]` ]; then
+		spigot
+	elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo paper | tr [:upper:] [:lower:]` ]; then
+		paper
+	else
+		spigot
+	fi
+}
+
+if [ "$override" = true ]; then 
+	ls $dir/*server.jar  >/dev/null || check_server
+	exit 0
 fi
+check_server
+
+
 
 if [ "$restart_server" = true ]; then
 
 	if [ "$quiet" = true ]; then
-		restart -q
+		restart-server -q
 	else
-		restart
+		restart-server
 	fi
 fi
 
