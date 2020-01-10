@@ -88,34 +88,22 @@ docker exec -it mc screen -r mc
 
 To exit the console safely use `CTRL + A then CTRL + D`
 
-### Upgrading the Spigot Server
+### Built-in Server Commands
 
-To upgrade to the current Spigot server, run the following while the container is running
+Pre-built CMDs have been built in:
+  * `start-server`
+  * `stop-server`
+  * `restart-server`
+  * `upgrade-server`
+
+To use the commands listed above, run the following while the container is running
 
 ```bash
-docker exec -it mc /bin/bash
-
-screen -r mc 
-stop
-
-/home/Minecraft/build-latest-server.sh
-
-/home/Minecraft/start.sh
+docker exec -it mc CMD
 ```
 
-> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the root server directory on the host and rename it `spigot-server.jar` restart server with the following commands
-```bash
-docker exec -it mc screen -r mc 
-restart
-```
+> NOTE: Pre-built Spigot server jar files can be downloaded from the [Spigot](https://getbukkit.org/download/spigot) website. Move the jar file into the root server directory on the host and rename it `spigot-server.jar`. The PaperMC variant can be downloaded from [PaperMC](https://papermc.io/downloads). Move the jar file into the root server directory on the host and rename it `paper-server.jar`
 
-### Upgrading the Paper Server
-
-Coming soon, for now simply delete the `paper-server.jar` file in the docker volume and restart the container. The latest version will be downloaded. Or a different build can be downloaded from [PaperMC](https://papermc.io/downloads). Move the jar file into the root server directory on the host and rename it `paper-server.jar` restart server with the following commands
-```bash
-docker exec -it mc screen -r mc 
-restart
-```
 
 ## Build from source
 
@@ -179,6 +167,7 @@ rebuild-mc.ps1 "FULL-PATH-TO-STORE-SERVER-ON-HOST"
 ### Attributions
 
 [Spigot](https://www.spigotmc.org/wiki/public-license/)
+
 [PaperMC](https://github.com/PaperMC/Paper/blob/ver/1.14/LICENSE.md)
 
 ## Special Thanks
