@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+quiet=false
+
+OPTIND=1
+while getopts "q" opt; do
+	case $opt in 
+	q)
+		quiet=true;;
+	esac
+done
+
+shift $((OPTIND-1))
+
+[ "${1:-}" = "--" ] && shift
+
+if [ "$quiet" = false ]; then
+    for i in {1..10}
+    do
+        sleep 1
+        t=$(expr 10 - $i)
+        send-2-screen mc "say Server restarting in $t seconds!"
+    done
+fi
+
+send-2-screen mc "restart"
+
+exit 0

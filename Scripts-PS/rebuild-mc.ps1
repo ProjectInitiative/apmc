@@ -1,7 +1,9 @@
 Param(
-    [Parameter(Mandatory=$True,Position=1)]
+    [Parameter(Position=1)]
     [string]$dir
 )
+
+if (!$dir) { $dir="$PSScriptRoot\.." }
 
 docker stop mc
 docker rm mc

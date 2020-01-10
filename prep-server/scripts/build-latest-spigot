@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+dir="/home/Minecraft"
+tmpdir=$(mktemp -d "$dir/tmp.XXXXXXXXXX")  
+cd $tmpdir
+
+wget -O $dir/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastStableBuild/artifact/target/BuildTools.jar
+
+git config --global --unset core.autocrif
+git config --global am.keepcr true
+java -jar BuildTools.jar --rev latest
+
+cp spigot*.jar $dir/spigot-server.jar
+
+cd $dir
+
+yes | rm -rf $tmpdir

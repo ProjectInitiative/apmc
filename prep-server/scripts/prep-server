@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+dir="/home/Minecraft"
+
+# Creates script for starting server
+printf "#!/usr/bin/env bash\nstart" > $dir/start.sh
+chmod +x $dir/start.sh
+
+update -n
+start
+
+# trap "/home/Minecraft/send-2-screen.sh mc stop" SIGTERM SIGINT
+# trap touch /home/Minecraft/testing.txt SIGTERM SIGINT
+
+# Keeps docker container alive
+while :
+do
+	sleep 60
+done
+
+exit 0
