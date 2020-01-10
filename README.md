@@ -90,7 +90,7 @@ To exit the console safely use `CTRL + A then CTRL + D`
 
 ### Built-in Server Commands
 
-Pre-built CMDs have been built in:
+CMDs that are built in:
   * `start-server`
   * `stop-server`
   * `restart-server`
