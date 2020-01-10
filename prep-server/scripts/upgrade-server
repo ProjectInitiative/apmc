@@ -25,7 +25,7 @@ sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
 
 mkdir -p "$dir/server-versions"
-mv "$dir/*.jar" "$dir/server-versions"
+mv "$dir/"*.jar "$dir/server-versions"
 
 function paper {
 	get-latest-paper
