@@ -5,7 +5,9 @@ dir="/home/Minecraft"
 tmpdir=$(mktemp -d "$dir/tmp.XXXXXXXXXX")  
 cd $tmpdir
 
-wget -O $dir/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastStableBuild/artifact/target/BuildTools.jar
+wget -O $tmpdir/BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastStableBuild/artifact/target/BuildTools.jar
+
+chmod +x $tmpdir/BuildTools.jar
 
 git config --global --unset core.autocrif
 git config --global am.keepcr true
