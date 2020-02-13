@@ -13,7 +13,8 @@ services:
             - ./Minecraft:/home/Minecraft
         ports:
             - "25565:25565"
-        environment: 
+        environment:
+            - EULA: true
             - minram: 4G
             - maxram: 8G
             - server_type: paper
