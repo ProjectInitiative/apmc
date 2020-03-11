@@ -3,19 +3,20 @@
 version: '3'
 
 services:
-    apmc:
-        container_name: mc
-        stdin_open: true
-        tty: true
-        restart: always
-        build: .
-        volumes:
-            - ./Minecraft:/home/Minecraft
-        ports:
-            - "25565:25565"
-        environment:
-            - EULA: true
-            - minram: 4G
-            - maxram: 8G
-            - server_type: paper
-            - TZ: America/Chicago
+  apmc:
+    image: projectinitiative/apmc
+    container_name: mc
+    stdin_open: true
+    tty: true
+    restart: always
+    build: .
+    volumes:
+      - ./Minecraft:/home/Minecraft
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "true"
+      minram: 4G
+      maxram: 8G
+      server_type: paper
+      TZ: America/Chicago

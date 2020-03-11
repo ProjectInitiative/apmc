@@ -1,0 +1,30 @@
+mkfifo /tmp/srv-input
+cat > /tmp/srv-input &
+echo $! > /tmp/srv-input-cat-pid
+cat /tmp/srv-input | myserver &
+
+
+
+
+CS=$1
+SC=$2
+
+exec 3>&0
+
+trap 'exit;' CHLD
+
+{
+while read LINE; do             #STDIN -> CS
+   print $LINE >>$CS;
+done;
+} <&3 &
+
+while true; do                  #SC -> STDOUT
+        read IN <$SC;
+        retCode=$?
+        if [[ $retCode -eq 0 ]]; then
+                echo $IN;
+        else
+                sleep 1;
+        fi
+done
