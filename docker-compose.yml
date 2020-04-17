@@ -9,7 +9,6 @@ services:
     stdin_open: true
     tty: true
     restart: always
-    build: .
     volumes:
       - ./Minecraft:/home/Minecraft
     ports:
