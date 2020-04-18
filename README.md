@@ -57,8 +57,11 @@ docker start mc
 | server_type  |                             Specify which type of server to be downloaded/compiled                              |     spigot/paper     |
 |     EULA     |                       Automatically accepts the end user license agreement for the server                       |         true         |
 | start_script | Path to custom start script (not named start.sh) Usually used for modded server packs with custom start scripts | PATH-TO-START-SCRIPT |
+| backup_cron  |                          A crontab pattern for the frequency of which backups are made                          |     0 */12 * * *     |
 
-> NOTE: Environmental variables do not need to be specified to run the server. Default values will be used. 
+Aside: Useful (crontab generator)[https://crontab.guru/every-12-hours]
+
+> NOTE: Environmental variables do not need to be specified to run the server. Default values will be used.
 
 ### Example Usage
 

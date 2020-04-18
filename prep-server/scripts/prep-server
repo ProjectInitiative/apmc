@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
+check-script prep-server $$ || exit 1
+
 sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
+
+# If the user has indicated a crontab pattern, add that to the crontable
+if [ ! -z "$backup_cron" ]; then
+# Remove leading and trailing whitespace
+	backup_cron=$(printf "$backup_cron" | awk '{$1=$1}1')
+	printf "$backup_cron backup-server\n" | crontab -u root -
+fi
+
 
 # Creates script for starting server
 printf "#!/usr/bin/env bash\nstart-server" > $dir/start.sh
@@ -13,7 +23,7 @@ start-server
 # trap "/home/Minecraft/send-2-screen.sh mc stop" SIGTERM SIGINT
 # trap touch /home/Minecraft/testing.txt SIGTERM SIGINT
 
-# Keeps docker container alive
+# Keeps docker container alive - possibly add in the auto-restart script detector in place of the wait
 while :
 do
 	sleep 60

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# A simple script to verify if an instance of a given script is already running
+# Purpose: provide a mechanism to protect against multiple script instances
+
 function message {
     printf "Error: missing arguments. please include <script-name> <current-script-ID>\n"
 }
@@ -14,7 +17,7 @@ process_name=$1
 process_id=$2
 
 for pid in $(pgrep -f $process_name); do
-    if [ $pid != $process_id ]; then
+    if [ $pid != $process_id ] && [ $pid != $$ ]; then
         printf "[$(date)] : $process_name : Process is already running with PID $pid\n"
         exit 1
     fi

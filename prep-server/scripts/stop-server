@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-script stop-server $$ || exit 1
+
 quiet=false
 
 OPTIND=1
@@ -25,6 +27,10 @@ if [ "$quiet" = false ]; then
     done
 fi
 
-send-2-screen mc "stop"
+# Only stop if server is running
+if [ $(server-status) = "running" ]; then
+    send-2-screen mc "stop"
+    exit 0
+fi
 
-exit 0
+exit 1

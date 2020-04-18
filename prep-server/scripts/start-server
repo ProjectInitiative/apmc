@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+check-script start-server $$ || exit 1
+
 sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
 
@@ -30,11 +32,10 @@ function run_server {
 if [ -f "$dir/eula.txt" ]; then
     run_server
 else
+# Run server for the first time if eula.txt does not exist
     send-2-screen mc "cd $dir; $start_script"
     sleep 10
     run_server
 fi
-
-
 
 exit 0

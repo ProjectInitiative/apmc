@@ -15,6 +15,7 @@ services:
       - "25565:25565"
     environment:
       EULA: "true"
+      backup_cron: "0 */12 * * *"
       minram: 4G
       maxram: 8G
       server_type: paper

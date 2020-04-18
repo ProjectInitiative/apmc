@@ -14,6 +14,6 @@ if ! screen -ls | grep -q $name; then
 	screen -dmS $name
 fi
 
-sleep 1
+#sleep 1
 screen -S $name -X stuff "${CMD} $(echo -ne '\015')"
 
