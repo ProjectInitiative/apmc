@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# If server is running exit with exit 0, else exit 1
+
+[ $(pgrep -f server.jar) ] && printf "running\n" && exit 0
+
+printf "stopped"
+exit 1
