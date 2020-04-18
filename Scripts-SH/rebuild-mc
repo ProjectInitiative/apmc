@@ -9,5 +9,7 @@ fi
 
 sudo docker stop mc
 sudo docker rm mc
-sudo "$sdir/create-mc-container.sh" "$dir"
+sudo "$sdir/create-mc-container" "$dir"
 sudo docker start mc
+
+sudo docker exec -it mc /bin/bash
