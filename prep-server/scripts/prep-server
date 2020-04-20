@@ -3,7 +3,7 @@
 # flock command that locks the script for only a single instance
 [ "${FLOCKER}"  != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 
-check-script crond $$ && crond -l 0 -L /var/log/cron.log
+crond -l 0 -L /var/log/cron.log
 
 sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
