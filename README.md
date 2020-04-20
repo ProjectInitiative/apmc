@@ -59,7 +59,7 @@ docker start mc
 | start_script | Path to custom start script (not named start.sh) Usually used for modded server packs with custom start scripts | PATH-TO-START-SCRIPT |
 | backup_cron  |                          A crontab pattern for the frequency of which backups are made                          |     0 */12 * * *     |
 
-Aside: Useful (crontab generator)[https://crontab.guru/every-12-hours]
+Aside: Useful [crontab generator](https://crontab.guru/every-12-hours)
 
 > NOTE: Environmental variables do not need to be specified to run the server. Default values will be used.
 
