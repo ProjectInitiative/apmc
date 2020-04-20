@@ -17,7 +17,7 @@ process_name=$1
 process_id=$2
 
 for pid in $(pgrep -f $process_name); do
-    if [ $pid != $process_id ] && [ $pid != $$ ]; then
+    if [ $pid != $process_id ] && [ $pid != $$ ] && [ $pid != $PPID ]; then
         printf "[$(date)] : $process_name : Process is already running with PID $pid\n"
         exit 1
     fi

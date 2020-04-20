@@ -1,10 +1,30 @@
 #!/usr/bin/env bash
 
-check-script backup-server $$ || exit 1
+# flock command that locks the script for only a single instance
+[ "${FLOCKER}"  != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 
-touch ~/Can-you-see-me.txt
+sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+dir="/home/Minecraft"
 
-while :
-do
-	sleep 60
-done
+mkdir -p "$dir/Backups"
+
+
+# Ensure that saving happens even if script is interupted.
+trap cleanup INT
+function cleanup {
+	send-2-screen mc "say Server backup complete."
+	send-2-screen mc "save-on"
+	send-2-screen mc "save-all"
+}
+
+send-2-screen mc "save-all"
+send-2-screen mc "say Server backup in progress."
+send-2-screen mc "save-off"
+
+filename="$(date +%Y-%m-%d_%H.%M)_mc-server"
+
+tar --exclude="$dir/Backups" -zcvf "$dir/Backups/$filename.tgz" "$dir"
+
+cleanup
+
+exit 0

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# flock command that locks the script for only a single instance
+[ "${FLOCKER}"  != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+
 quiet=false
 restart_server=true
 override=false

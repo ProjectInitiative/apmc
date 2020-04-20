@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-check-script prep-server $$ || exit 1
+# flock command that locks the script for only a single instance
+[ "${FLOCKER}"  != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+
+check-script crond $$ && crond -l 0 -L /var/log/cron.log
 
 sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 dir="/home/Minecraft"
@@ -9,7 +12,7 @@ dir="/home/Minecraft"
 if [ ! -z "$backup_cron" ]; then
 # Remove leading and trailing whitespace
 	backup_cron=$(printf "$backup_cron" | awk '{$1=$1}1')
-	printf "$backup_cron backup-server\n" | crontab -u root -
+	( crontab -u root -l; printf "$backup_cron backup-server\n" ) | crontab -u root -
 fi
 
 
