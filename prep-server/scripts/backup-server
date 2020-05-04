@@ -21,9 +21,12 @@ send-2-screen mc "save-all"
 send-2-screen mc "say Server backup in progress."
 send-2-screen mc "save-off"
 
-filename="$(date +%Y-%m-%d_%H.%M)_mc-server"
+date=$(date +%Y-%m-%d)
 
-tar --exclude="$dir/Backups" -zcvf "$dir/Backups/$filename.tgz" "$dir"
+mkdir -p "$dir/Backups/$date"
+filename="${date}_$(date +%H.%M)_mc-server"
+
+tar --exclude="$dir/Backups" -zcvf "$dir/Backups/$date/$filename.tgz" "$dir"
 
 cleanup
 
