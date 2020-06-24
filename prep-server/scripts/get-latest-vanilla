@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
-# Usage:
-#   ./latest_vanilla.sh [branch] [asset] [output]
-#
-# Positional Arguments:
-#   [branch] is "release" or "snapshot"
-#   [asset] is "client", "client_mappings", "server", or "server_mappings"
-#   [output] is a file name
-
+# -h or --help CLI helptext
+if [[ "$1" =~ ^-{1,2}h(elp)?$ ]] ; then
+    echo "Usage:"
+    echo "  ./latest_vanilla.sh [branch] [asset] [output]"
+    echo
+    echo "Positional Arguments:"
+    echo "  [branch] is \"release\" or \"snapshot\""
+    echo "  [asset] is \"client\", \"client_mappings\", \"server\", or \"server_mappings\""
+    echo "  [output] is a file name"
+    exit
+fi
 
 # entrypoint URL
 VERSION_MANIFEST="https://launchermeta.mojang.com/mc/game/version_manifest.json"
@@ -15,8 +18,19 @@ VERSION_MANIFEST="https://launchermeta.mojang.com/mc/game/version_manifest.json"
 # naming CLI inputs
 branch=$1
 : ${branch:=release}
+if ! [[ "$branch" =~ ^(release|snapshot)$ ]] ; then
+    echo "Unrecognized branch \"$branch\". Expected \"release\" or \"snapshot\"."
+    exit 2
+fi
+
+
 asset=$2
 : ${asset:=server}
+if ! [[ "$asset" =~ ^(client|client_mappings|server|server_mappings)$ ]] ; then
+    echo "Unrecognized asset \"$asset\". Expected \"client\", \"client_mappings\", \"server\", or \"server_mappings\"."
+    exit 2
+fi
+
 output=$3
 
 # base version manifest JSON
