@@ -14,6 +14,7 @@ while getopts "qno" opt; do
 		quiet=true;;
 	n)
 		restart_server=false;;
+	# Override current server version and force a re-download
 	o) 
 		override=true;;
 	esac
@@ -30,6 +31,10 @@ dir="/home/Minecraft"
 mkdir -p "$dir/server-versions"
 mv "$dir/"*.jar "$dir/server-versions"
 
+function vanilla {
+	get-latest-vanilla
+}
+
 function paper {
 	get-latest-paper
 }
@@ -43,12 +48,14 @@ function spigot {
 }
 
 function check_server {
-	if [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo spigot | tr [:upper:] [:lower:]` ]; then
-		spigot
+	if [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo vanilla | tr [:upper:] [:lower:]` ]; then
+		vanilla
 	elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo paper | tr [:upper:] [:lower:]` ]; then
 		paper
-	else
+	elif [ `echo $server_type | tr [:upper:] [:lower:]` =  `echo spigot | tr [:upper:] [:lower:]` ]; then
 		spigot
+	else
+		vanilla
 	fi
 }
 

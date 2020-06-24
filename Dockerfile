@@ -8,6 +8,7 @@ RUN apk update &&\
     apk add bash &&\
     apk add gawk && \
     apk add curl && \
+    apk add jq &&\
     apk add tar &&\
     apk add screen &&\
     apk add openjdk8 &&\

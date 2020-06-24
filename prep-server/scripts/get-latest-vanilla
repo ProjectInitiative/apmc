@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+dir="/home/Minecraft"
+
+base="https://launchermeta.mojang.com/mc/game/version_manifest.json"
+latest=$(curl -L $base | jq -r .versions[0].url)
+url=$(curl -L $latest | jq -r .downloads.server.url)
+curl -JLO $url
+
+mv server.jar "$dir/server.jar"

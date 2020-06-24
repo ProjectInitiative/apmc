@@ -54,7 +54,7 @@ docker start mc
 |      TZ      |                                                    Timezone                                                     |   America/Chicago    |
 |    minram    |                                      Minimum RAM to allocate to the server                                      |       1G/512M        |
 |    maxram    |                                      Maximum RAM to allocate to the server                                      |       1G/512M        |
-| server_type  |                             Specify which type of server to be downloaded/compiled                              |     spigot/paper     |
+| server_type  |                             Specify which type of server to be downloaded/compiled                              | vanilla/spigot/paper |
 |     EULA     |                       Automatically accepts the end user license agreement for the server                       |         true         |
 | start_script | Path to custom start script (not named start.sh) Usually used for modded server packs with custom start scripts | PATH-TO-START-SCRIPT |
 | backup_cron  |                          A crontab pattern for the frequency of which backups are made                          |     0 */12 * * *     |
