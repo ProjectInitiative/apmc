@@ -20,7 +20,7 @@ branch=$1
 : ${branch:=release}
 if ! [[ "$branch" =~ ^(release|snapshot)$ ]] ; then
     echo "Unrecognized branch \"$branch\". Expected \"release\" or \"snapshot\"."
-    exit 2
+    exit 1
 fi
 
 
@@ -28,7 +28,7 @@ asset=$2
 : ${asset:=server}
 if ! [[ "$asset" =~ ^(client|client_mappings|server|server_mappings)$ ]] ; then
     echo "Unrecognized asset \"$asset\". Expected \"client\", \"client_mappings\", \"server\", or \"server_mappings\"."
-    exit 2
+    exit 1
 fi
 
 output=$3
@@ -51,7 +51,7 @@ if [ -f "$output" ] ; then
     existing_hash=$(sha1sum "$output" | sed -r 's/^([0-9a-f]{40})\b.*$/\1/')
     if [ "$latest_hash" == "$existing_hash" ] ; then
         echo "Existing file hash matches, skipping download."
-        exit 1
+        exit
     fi
 fi
 
@@ -62,7 +62,7 @@ curl -s --output "$output" "$latest_asset"
 output_hash=$(sha1sum "$output" | sed -r 's/^([0-9a-f]{40})\b.*$/\1/')
 if [ "$latest_hash" != "$output_hash" ] ; then
     echo "Downloaded file hash $output_hash did not match expected hash $latest_hash."
-    exit 2
+    exit 1
 else
     echo "Downloaded file hash $output_hash was verified correctly."
 fi
