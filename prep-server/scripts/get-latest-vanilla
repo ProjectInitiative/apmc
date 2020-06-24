@@ -1,11 +1,54 @@
 #!/usr/bin/env bash
 
-sdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-dir="/home/Minecraft"
+# Usage:
+#   ./latest_vanilla.sh [branch] [asset] [output]
+#
+# Positional Arguments:
+#   [branch] is "release" or "snapshot"
+#   [asset] is "client", "client_mappings", "server", or "server_mappings"
+#   [output] is a file name
 
-base="https://launchermeta.mojang.com/mc/game/version_manifest.json"
-latest=$(curl -L $base | jq -r .versions[0].url)
-url=$(curl -L $latest | jq -r .downloads.server.url)
-curl -JLO $url
 
-mv server.jar "$dir/server.jar"
+# entrypoint URL
+VERSION_MANIFEST="https://launchermeta.mojang.com/mc/game/version_manifest.json"
+
+# naming CLI inputs
+branch=$1
+: ${branch:=release}
+asset=$2
+: ${asset:=server}
+output=$3
+
+# base version manifest JSON
+json_versions=$(curl -s "$VERSION_MANIFEST")
+latest_version=$(echo $json_versions | jq -r ".latest.$branch")
+latest_url=$(echo $json_versions | jq -r ".versions | map(select(.id = "$latest_version")) | .[0].url")
+
+# version-specific JSON
+json_branch=$(curl -s "$latest_url")
+latest_asset=$(echo "$json_branch" | jq -r ".downloads.$asset.url")
+latest_hash=$(echo "$json_branch" | jq -r ".downloads.$asset.sha1")
+latest_filename=$(echo "$latest_asset" | sed -r 's/^.*\/([^\/]+)$/\1/')
+: ${output:=$latest_filename}
+
+# download output file
+if [ -f "$output" ] ; then
+    echo "Checking existing file \"$output\"."
+    existing_hash=$(sha1sum "$output" | sed -r 's/^([0-9a-f]{40})\b.*$/\1/')
+    if [ "$latest_hash" == "$existing_hash" ] ; then
+        echo "Existing file hash matches, skipping download."
+        exit 1
+    fi
+fi
+
+echo "Downloading latest $asset on the $branch branch to \"$output\"."
+curl -s --output "$output" "$latest_asset"
+
+# verify output file
+output_hash=$(sha1sum "$output" | sed -r 's/^([0-9a-f]{40})\b.*$/\1/')
+if [ "$latest_hash" != "$output_hash" ] ; then
+    echo "Downloaded file hash $output_hash did not match expected hash $latest_hash."
+    exit 2
+else
+    echo "Downloaded file hash $output_hash was verified correctly."
+fi

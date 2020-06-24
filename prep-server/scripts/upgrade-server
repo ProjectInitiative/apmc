@@ -32,7 +32,7 @@ mkdir -p "$dir/server-versions"
 mv "$dir/"*.jar "$dir/server-versions"
 
 function vanilla {
-	get-latest-vanilla
+	get-latest-vanilla release server "$dir/server.jar"
 }
 
 function paper {
