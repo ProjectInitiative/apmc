@@ -36,7 +36,7 @@ output=$3
 # base version manifest JSON
 json_versions=$(curl -s "$VERSION_MANIFEST")
 latest_version=$(echo $json_versions | jq -r ".latest.$branch")
-latest_url=$(echo $json_versions | jq -r ".versions | map(select(.id = "$latest_version")) | .[0].url")
+latest_url=$(echo $json_versions | jq -r ".versions | map(select(.id = "\"$latest_version\"")) | .[0].url")
 
 # version-specific JSON
 json_branch=$(curl -s "$latest_url")
